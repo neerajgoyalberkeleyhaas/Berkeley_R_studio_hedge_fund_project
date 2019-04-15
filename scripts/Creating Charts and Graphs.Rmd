@@ -1,0 +1,85 @@
+---
+title: "Graphs"
+author: "Neeraj Goyal"
+date: "April 3, 2019"
+output: html_document
+---
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+total1 <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/output/total1.csv"))
+
+## Plot of Hedge Fund returns by industry
+
+Primary.Industry.results <- total1 %>%
+  group_by(Primary.Industry)%>%
+  summarise(count=n(),
+            Oneweekret = mean(Oneweekret),
+            CampaignRet = mean(CampaignRet),
+            Total.Revenues = mean(Total.Revenues),
+            Net.Income = mean(Net.Income),
+            Gross.Profit = mean(Gross.Profit),
+            R...D.Exp. = mean(R...D.Exp.),
+            Operating.Income = mean(Operating.Income),
+            Mean.of.Basic.EPS = mean(Basic.EPS),
+            Unlevered.Free.Cash.Flow = mean(Unlevered.Free.Cash.Flow),
+            Marketcap = mean(Marketcap))
+ 
+Primary.Industry.results2 <- subset(Primary.Industry.results, count>=10)
+#### export merged dataset
+write.csv(Primary.Industry.results2, "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/output/Primary.Industry.results2.csv")
+
+
+Primary.Industry.results2 <- arrange(Primary.Industry.results2, desc(CampaignRet))
+ggplot(Primary.Industry.results2, aes(x=reorder(Primary.Industry, 32:1), y=CampaignRet)) + coord_flip() + labs(title = "Average Hedge Fund returns by industry", x = "Primary Industry", y= "Hedge Fund Return % (when n per industry > 10)") + geom_bar(stat='identity') + geom_hline(yintercept = mean(Primary.Industry.results2$CampaignRet), color='red', size=2)
+
+ggsave("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/images/Returns_by_industry.png")
+
+##Plot of returns
+options(scipen=999)  
+theme_set(theme_bw())  # pre-set the bw theme.
+data("Primary.Industry.results2", package = "ggplot2")
+
+Primary.Industry.results3 <- subset(Primary.Industry.results, count>=20)
+
+Marketcap_vs_returns <- ggplot(Primary.Industry.results3, aes(x=Operating.Income, y=CampaignRet)) + 
+  geom_point(aes(col=Primary.Industry, size=Marketcap)) + 
+  geom_smooth(method="loess", se=F) + 
+  labs(subtitle="Returns on Operating Income of 8 largest industries (MarketCap in $ MM USD)", 
+       y="Decline in stock after targeted by Hedge Fund (%)", 
+       x="Operating Income (in $ MM USD)", 
+       title="Hedge Fund Returns vs Target's Profitability")
+
+plot(Marketcap_vs_returns)
+
+ggsave("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/images/Marketcap_vs_returns_top_8.png")
+
+
+## Plot of returns vs Operating income for all industries
+# Scatterplot
+theme_set(theme_bw())  # pre-set the bw theme.
+
+Primary.Industry.results4 <- subset(Primary.Industry.results, Primary.Industry != "Trading Companies and Distributors")
+
+returns_and_operating_inc <- ggplot(Primary.Industry.results4, aes(x=Operating.Income, y=CampaignRet)) + 
+  geom_point(aes(size=Marketcap)) + 
+  geom_smooth(method="loess", se=F) + 
+  labs(subtitle="Returns on Operating Income of all industries (MarketCap in $ MM USD)", 
+       y="Decline in stock after targeted by Hedge Fund (%)", 
+       x="Operating Income (in $ MM USD)", 
+       title="Hedge Fund Returns vs Target's Profitability")
+
+plot(returns_and_operating_inc)
+
+ggsave("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/images/returns_and_operating_inc_all.png")
+
+#####################
+
+
+ggplot(points_salary_cost, aes(median_points, median_salary)) + geom_point(aes(size = Marketcap)) + theme_minimal() + labs(title = "Efficiency of NBA Teams - Cost per point (larger circle implies more inefficient)", x = "Median Points", y= "Median Salary ($USD Millions)") + geom_text(label=points_salary_cost$team)
+
+
+```
+

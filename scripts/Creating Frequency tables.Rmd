@@ -1,0 +1,112 @@
+---
+title: "Creating Frequency tables"
+author: "Neeraj Goyal"
+date: "April 1, 2019"
+output: html_document
+---
+```{r}
+
+#### Creating Frequency tables on the combined dataset of Raw, Raw financial, and dummy variable dataset
+
+total1 <- data.frame(read.csv("total1.csv"))
+
+library(dplyr)
+
+frequency_of_complaints <- total1 %>%
+  group_by(Sample.year)%>%
+  summarise(financing.incompetence = sum(financing.incompetence),
+            management.incompetence = sum(management.incompetence),
+            Weak.Market.environment = sum(Weak.Market.environment),
+            Weak.board.of.director.oversight = sum(Weak.board.of.director.oversight),
+            Weak.operations = sum(Weak.operations),
+            Weak.Product. = sum(Weak.Product.),
+            Weak.Marketing = sum(Weak.Marketing),
+            Overhyped.market.environment = sum(Overhyped.market.environment),
+            Competitor.pressure = sum(Competitor.pressure),
+            legal.headwinds = sum(legal.headwinds),
+            n.a = sum(n.a),
+            regulatory.headwinds = sum(regulatory.headwinds),
+            Fraud..accounting..business..or.other. = sum(Fraud..accounting..business..or.other.), 
+            Potential.Accounting.Manipulation = sum(Potential.Accounting.Manipulation),
+            Potential.Managerial.Manipulation = sum(Potential.Managerial.Manipulation))
+
+frequency_of_complaints <- arrange(frequency_of_complaints, desc(Sample.year))   
+
+#### export merged dataset
+write.csv(frequency_of_complaints, "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/output/frequency_of_complaints.csv")
+
+
+Companyfate <- total1 %>%
+  group_by(Companyfate)%>%
+  summarise(financing.incompetence = sum(financing.incompetence),
+            management.incompetence = sum(management.incompetence),
+            Weak.Market.environment = sum(Weak.Market.environment),
+            Weak.board.of.director.oversight = sum(Weak.board.of.director.oversight),
+            Weak.operations = sum(Weak.operations),
+            Weak.Product. = sum(Weak.Product.),
+            Weak.Marketing = sum(Weak.Marketing),
+            Overhyped.market.environment = sum(Overhyped.market.environment),
+            Competitor.pressure = sum(Competitor.pressure),
+            legal.headwinds = sum(legal.headwinds),
+            n.a = sum(n.a),
+            regulatory.headwinds = sum(regulatory.headwinds),
+            Fraud..accounting..business..or.other. = sum(Fraud..accounting..business..or.other.), 
+            Potential.Accounting.Manipulation = sum(Potential.Accounting.Manipulation),
+            Potential.Managerial.Manipulation = sum(Potential.Managerial.Manipulation))
+ 
+
+#### export merged dataset
+write.csv(Companyfate, "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/output/Companyfate.csv")
+
+
+Primary.Industry <- total1 %>%
+  group_by(Primary.Industry)%>%
+  summarise(financing.incompetence = sum(financing.incompetence),
+            management.incompetence = sum(management.incompetence),
+            Weak.Market.environment = sum(Weak.Market.environment),
+            Weak.board.of.director.oversight = sum(Weak.board.of.director.oversight),
+            Weak.operations = sum(Weak.operations),
+            Weak.Product. = sum(Weak.Product.),
+            Weak.Marketing = sum(Weak.Marketing),
+            Overhyped.market.environment = sum(Overhyped.market.environment),
+            Competitor.pressure = sum(Competitor.pressure),
+            legal.headwinds = sum(legal.headwinds),
+            n.a = sum(n.a),
+            regulatory.headwinds = sum(regulatory.headwinds),
+            Fraud..accounting..business..or.other. = sum(Fraud..accounting..business..or.other.), 
+            Potential.Accounting.Manipulation = sum(Potential.Accounting.Manipulation),
+            Potential.Managerial.Manipulation = sum(Potential.Managerial.Manipulation))
+ 
+
+#### export merged dataset
+write.csv(Primary.Industry, "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/output/Primary.Industry.csv")
+
+            
+## Rough work below - saving code, but not being used
+install.packages('plyr')
+install.packages('reshape2')
+install.packages('tidyverse')
+library(reshape2)
+library(tidyverse)
+
+melted_data <- melt(total1, id=c("Fraud (accounting, business, or other)", "Potential Accounting Manipulation", "Potential Managerial Manipulation", "Weak board of director oversight", "Weak operations", "Weak Product ", "Weak Marketing", "financing incompetence", "management incompetence", "Weak Market environment", "Overhyped market environment", "Competitor pressure", "legal headwinds", "n/a", "regulatory headwinds"))
+
+temp2 <- total1 %>%
+  gather(complaint, indicator, 30:44) %>%
+  select(c(3,162, 163)) %>%
+  filter(indicator == 1)
+
+table1 = table(total1$Sample.year)
+table1
+
+temp2 <- total1 %>%
+  gather(complaint, indicator, 29:43) %>%
+  select(c(2,162, 163)) %>%
+  filter(indicator == 1)
+
+Frequency.of.complaints = table(temp2$Sample.year, temp2$complaint)
+
+
+
+```
+

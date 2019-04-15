@@ -1,0 +1,128 @@
+"","Primary.Industry","financing.incompetence","management.incompetence","Weak.Market.environment","Weak.board.of.director.oversight","Weak.operations","Weak.Product.","Weak.Marketing","Overhyped.market.environment","Competitor.pressure","legal.headwinds","n.a","regulatory.headwinds","Fraud..accounting..business..or.other.","Potential.Accounting.Manipulation","Potential.Managerial.Manipulation"
+"1","(Invalid Identifier)",0,0,0,0,0,0,0,0,0,0,2,0,0,0,0
+"2","0",0,0,0,0,0,1,0,1,0,0,2,0,0,0,1
+"3","Advertising",1,0,0,1,0,1,0,0,1,0,7,0,0,1,1
+"4","Aerospace and Defense",3,4,0,0,0,3,0,2,2,1,0,1,0,3,2
+"5","Agricultural Products",1,1,0,0,0,0,0,1,0,0,1,0,1,1,1
+"6","Air Freight and Logistics",1,1,0,0,0,1,0,1,0,0,0,0,0,0,1
+"7","Alternative Carriers",1,2,0,0,0,7,0,3,5,1,0,1,2,0,5
+"8","Aluminum",0,1,0,0,0,0,0,0,0,1,1,1,1,0,0
+"9","Apparel Retail",0,1,0,0,0,0,0,1,1,0,0,0,0,0,1
+"10","Apparel, Accessories and Luxury Goods",0,1,0,0,0,2,0,1,2,0,0,0,1,1,2
+"11","Application Software",7,18,0,3,6,21,0,17,16,11,10,5,12,16,23
+"12","Asset Management and Custody Banks",3,2,0,1,0,2,0,2,2,1,1,2,3,2,6
+"13","Auto Parts and Equipment",0,2,1,0,0,1,0,0,1,1,4,1,2,2,1
+"14","Automobile Manufacturers",3,4,0,2,1,3,0,4,4,0,0,0,0,2,1
+"15","Automotive Retail",0,0,0,0,0,0,0,2,0,0,1,0,0,0,0
+"16","Biotechnology",24,22,0,1,33,78,1,23,30,8,1,18,21,18,64
+"17","Building Products",0,1,0,0,0,1,0,1,2,1,0,0,0,1,1
+"18","Cable and Satellite",0,1,1,0,0,1,0,0,0,1,0,0,0,1,0
+"19","Casinos and Gaming",3,2,0,0,0,0,0,1,1,0,5,0,1,1,2
+"20","Coal and Consumable Fuels",2,4,0,0,2,3,0,0,3,2,5,1,6,2,2
+"21","Commercial Printing",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"22","Commodity Chemicals",0,0,0,0,0,0,0,1,0,0,7,0,2,1,2
+"23","Communications Equipment",3,4,0,0,0,4,0,1,3,2,1,1,3,4,2
+"24","Computer and Electronics Retail",0,2,1,0,0,0,0,0,2,0,0,1,0,0,1
+"25","Construction and Engineering",3,1,0,1,0,1,0,4,2,0,2,0,2,1,2
+"26","Construction Machinery and Heavy Trucks",2,3,0,0,0,4,0,2,1,0,0,1,1,1,2
+"27","Construction Materials",0,1,0,0,0,0,0,2,0,0,1,0,0,0,1
+"28","Consumer Electronics",2,4,0,0,1,3,0,2,5,1,1,1,2,2,4
+"29","Consumer Finance",1,2,0,0,0,2,0,1,1,0,0,3,2,3,3
+"30","Data Processing and Outsourced Services",1,2,0,1,0,1,0,1,1,3,0,3,3,3,4
+"31","Department Stores",1,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"32","Distillers and Vintners",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"33","Distributors",2,2,0,0,1,0,0,1,0,0,0,1,0,1,2
+"34","Diversified Banks",4,1,0,0,0,1,0,4,0,0,2,1,1,2,0
+"35","Diversified Chemicals",0,0,0,0,0,0,0,0,0,1,0,1,1,0,0
+"36","Diversified Metals and Mining",2,2,0,1,1,4,0,3,3,3,2,2,1,3,7
+"37","Diversified Real Estate Activities",2,0,0,0,0,1,0,0,0,0,0,1,1,1,0
+"38","Diversified Support Services",1,1,0,0,1,2,0,4,2,1,0,1,1,0,2
+"39","Education Services",2,1,1,0,0,3,0,0,0,2,5,1,1,1,2
+"40","Electric Utilities",1,1,0,0,0,0,0,0,0,0,0,0,0,1,0
+"41","Electrical Components and Equipment",7,9,0,0,5,12,0,4,12,1,5,3,3,14,11
+"42","Electronic Components",1,0,0,0,0,1,0,1,1,0,2,0,2,0,1
+"43","Electronic Equipment and Instruments",4,3,0,0,2,8,0,3,4,2,1,0,3,4,3
+"44","Electronic Manufacturing Services",2,3,0,0,0,8,0,5,9,3,0,5,0,0,6
+"45","Environmental and Facilities Services",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"46","Fertilizers and Agricultural Chemicals",0,0,0,0,0,0,0,0,0,0,3,0,0,0,0
+"47","Financial Exchanges and Data",0,0,0,0,0,0,0,0,0,0,2,0,0,0,0
+"48","Food Distributors",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"49","Food Retail",1,2,0,0,0,1,0,1,1,0,0,0,1,0,1
+"50","Footwear",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"51","Forest Products",0,0,0,0,0,1,0,0,1,0,1,0,1,0,0
+"52","Gas Utilities",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"53","General Merchandise Stores",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"54","Gold",0,1,0,0,0,0,0,1,1,0,0,0,1,1,6
+"55","Health Care Distributors",1,1,0,0,0,1,0,0,1,0,0,0,0,1,1
+"56","Health Care Equipment",5,2,0,0,1,13,0,7,8,3,4,2,2,2,9
+"57","Health Care Facilities",0,1,0,0,0,2,0,1,1,1,0,0,1,0,2
+"58","Health Care Services",2,7,1,0,3,6,0,1,5,5,1,6,8,2,10
+"59","Health Care Supplies",5,4,0,0,0,7,0,2,4,3,0,3,4,4,6
+"60","Health Care Technology",1,5,0,0,0,6,0,3,4,1,1,1,1,0,3
+"61","Heavy Electrical Equipment",1,2,1,0,0,1,0,0,0,1,5,0,0,1,3
+"62","Home Furnishings",0,1,0,0,1,1,0,0,1,0,0,0,0,1,1
+"63","Home Improvement Retail",3,3,0,1,1,5,0,2,3,5,0,4,3,1,3
+"64","Homebuilding",1,1,0,1,0,1,0,1,0,1,0,0,0,1,2
+"65","Hotels, Resorts and Cruise Lines",0,0,0,0,0,0,0,0,0,0,2,0,0,0,0
+"66","Household Appliances",0,2,0,0,1,2,0,2,1,0,3,0,1,0,2
+"67","Household Products",1,0,0,0,0,0,0,0,0,1,0,1,0,1,1
+"68","Housewares and Specialties",0,0,0,0,0,0,0,0,0,1,0,0,1,0,1
+"69","Human Resource and Employment Services",1,0,0,0,0,0,0,0,0,1,0,0,1,0,0
+"70","Industrial Conglomerates",1,0,0,0,0,0,0,1,0,0,0,0,1,1,0
+"71","Industrial Gases",0,0,0,0,0,1,0,0,0,0,0,0,1,0,1
+"72","Industrial Machinery",0,2,0,0,0,5,0,5,3,1,3,0,1,3,1
+"73","Integrated Oil and Gas",1,2,0,0,0,1,0,1,1,0,1,1,0,1,1
+"74","Integrated Telecommunication Services",1,2,0,2,0,2,0,2,1,1,2,1,2,2,3
+"75","Interactive Home Entertainment",0,1,0,0,0,1,0,0,0,0,3,0,0,0,1
+"76","Interactive Media and Services",0,5,0,0,2,9,0,5,8,2,4,3,1,1,5
+"77","Internet and Direct Marketing Retail",2,4,0,0,4,5,0,3,5,0,3,1,1,4,5
+"78","Internet Services and Infrastructure",4,2,0,0,0,5,0,4,4,1,3,0,2,3,6
+"79","Investment Banking and Brokerage",0,0,0,0,0,0,0,0,0,0,5,0,0,0,0
+"80","IT Consulting and Other Services",3,2,0,0,0,4,0,0,2,0,2,0,1,0,3
+"81","Leisure Facilities",1,2,0,1,0,0,0,0,2,0,0,0,0,1,0
+"82","Leisure Products",1,2,0,0,0,1,0,0,2,0,0,0,0,0,0
+"83","Life and Health Insurance",1,2,0,0,1,2,0,0,1,1,1,2,0,0,2
+"84","Life Sciences Tools and Services",0,1,0,0,0,3,0,1,0,0,0,1,3,0,3
+"85","Metal and Glass Containers",1,1,0,0,0,0,0,0,1,0,0,0,1,1,1
+"86","Mortgage REITs",0,1,0,1,0,0,0,1,0,1,0,0,1,1,1
+"87","Movies and Entertainment",4,6,0,0,1,3,0,5,6,1,2,0,5,7,5
+"88","Multi-Utilities",1,1,0,0,0,1,0,0,1,0,0,1,0,0,1
+"89","Oil and Gas Equipment and Services",2,2,0,0,0,2,0,3,3,0,3,0,1,0,1
+"90","Oil and Gas Exploration and Production",11,9,0,2,2,3,0,9,6,0,0,0,3,8,12
+"91","Oil and Gas Refining and Marketing",4,2,0,0,0,2,0,0,3,0,4,0,0,0,3
+"92","Oil and Gas Storage and Transportation",2,2,0,0,0,1,0,0,1,0,0,0,1,0,1
+"93","Packaged Foods and Meats",4,10,0,3,2,6,0,8,8,1,4,3,6,5,7
+"94","Paper Products",0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+"95","Personal Products",4,6,1,0,1,4,3,4,1,3,5,3,5,3,10
+"96","Pharmaceuticals",13,17,0,2,3,32,0,11,16,5,1,13,13,9,22
+"97","Property and Casualty Insurance",3,4,0,3,1,0,0,5,2,0,3,4,3,3,6
+"98","Publishing",1,1,0,0,0,0,0,1,2,0,1,0,0,0,0
+"99","Railroads",1,1,0,1,1,0,0,1,0,0,0,0,0,0,0
+"100","Real Estate Development",0,0,0,0,0,0,0,0,0,0,3,0,0,0,0
+"101","Real Estate Operating Companies",1,1,0,0,0,1,0,0,0,1,0,1,0,1,2
+"102","Real Estate Services",0,0,0,1,0,0,0,0,1,0,0,0,1,0,0
+"103","Regional Banks",3,1,1,0,0,3,0,6,2,1,0,2,1,4,3
+"104","Research and Consulting Services",1,1,0,1,0,1,0,1,0,0,1,1,1,0,1
+"105","Residential REITs",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"106","Restaurants",5,6,0,0,3,3,0,8,6,0,0,1,0,3,5
+"107","Retail REITs",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"108","Semiconductor Equipment",1,1,0,0,0,1,0,1,2,0,0,0,0,0,1
+"109","Semiconductors",6,13,2,0,1,12,0,5,13,2,8,3,2,2,11
+"110","Silver",1,0,0,0,0,0,0,0,0,0,0,0,1,1,3
+"111","Soft Drinks",0,1,0,1,2,4,0,0,2,1,0,1,1,3,3
+"112","Specialized Consumer Services",1,1,0,0,0,0,0,1,1,0,1,1,1,0,2
+"113","Specialized Finance",2,1,0,1,1,3,0,1,2,0,4,0,0,2,2
+"114","Specialized REITs",1,2,0,1,0,2,0,0,1,0,0,0,1,1,1
+"115","Specialty Chemicals",1,2,0,0,0,6,0,2,4,0,3,2,3,1,4
+"116","Specialty Stores",2,5,0,1,2,5,0,2,5,1,0,0,0,0,5
+"117","Steel",2,2,0,0,1,0,0,1,1,1,3,1,1,0,1
+"118","Systems Software",1,2,0,0,0,5,0,5,7,0,4,0,2,1,5
+"119","Technology Distributors",0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+"120","Technology Hardware, Storage and Peripherals",0,7,0,1,1,4,0,8,7,0,1,0,3,2,11
+"121","Thrifts and Mortgage Finance",5,5,0,2,1,1,0,4,4,2,1,5,3,5,3
+"122","Tires and Rubber",0,1,0,0,0,0,0,0,1,0,0,0,0,0,0
+"123","Tobacco",1,0,0,0,0,2,0,0,0,0,0,0,1,0,2
+"124","Trading Companies and Distributors",4,1,0,1,1,1,0,1,1,0,1,1,2,3,2
+"125","Trucking",2,1,0,0,0,0,0,2,0,0,0,0,0,0,0
+"126","Water Utilities",2,3,0,0,0,2,0,0,0,1,1,4,2,2,3
+"127","Wireless Telecommunication Services",0,0,0,0,0,1,0,0,2,1,0,1,0,0,1

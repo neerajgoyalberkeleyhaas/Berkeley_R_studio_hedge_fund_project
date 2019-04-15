@@ -1,0 +1,55 @@
+---
+title: "Cleaning and Combining datasets"
+author: "Neeraj Goyal"
+date: "March 11, 2019"
+output: html_document
+---
+```{r}
+library(dplyr)
+library(ggplot2)
+## set working directory to: C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project
+
+#### Load Dictionary of Categories - boiling 180+ complaints made by Hedge Funds into 15 more manageable categories
+
+allcat = data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/category_dictionary.csv", 
+                             header=  TRUE))
+allcat_subcat = strsplit(as.character(allcat[, 2]), ";")
+
+#### Load Raw Dataset, Make Dummy Variables
+
+raw <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/raw.csv"))
+catmatrix = data.frame(mat.or.vec(982, 15))
+colnames(catmatrix) = as.character(allcat[, 1])
+
+for (i in 1:dim(catmatrix)[1]){
+  thisdeal_subcats = strsplit(as.character(raw[i, "Keywords.Combined.TOTAL"]), ";")[[1]]
+  
+  for (j in 1:(dim(allcat)[1])){
+    thismaincat_subcats = as.character(allcat_subcat[[j]])
+    isincat = length(intersect(tolower(thismaincat_subcats), tolower(thisdeal_subcats))) > 0
+    
+    if (isincat == TRUE){
+      catmatrix[i, j] = 1
+    }
+  }
+  
+  print(i)
+  
+}
+
+#### Combine dataframe catmatrix, raw dataset and raw_financial dataset
+raw_financial <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/raw_financial.csv"))
+
+catmatrix1 <- mutate(catmatrix, rowposition = rownames(catmatrix))
+raw1 <- mutate(raw, rowposition = rownames(raw))
+raw_financial1 <- mutate(raw_financial, rowposition = rownames(raw_financial))
+
+total <- merge(raw1, catmatrix1, by = "rowposition")
+total1 <- merge(total, raw_financial1, by=c("Ticker", "Sample.year", "Short.seller"))
+
+#### export merged dataset
+write.csv(total1, "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/Activist Hedge Funds/output/total1.csv")
+
+
+```
+
