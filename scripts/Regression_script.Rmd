@@ -1,0 +1,155 @@
+---
+title: "Regression-analysis"
+author: "Neeraj Goyal"
+date: "April 17, 2019"
+output: html_document
+---
+```{r}
+### This file is for regression analyses.
+install.packages("sjPlot")
+install.packages("sjmisc")
+install.packages("sjlabelled")
+install.packages("snakecase")
+library (dplyr)
+library (readr)
+library(broom)
+#### Manipulating file for analysis
+total1file <- "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/data (in progress)/total1.csv"
+total1 <- read_csv(file = total1file, col_names = TRUE)
+
+total2 <- mutate(total1, norm_working_capital = ((Total.Current.Assets-Total.Current.Liabilities)/Total.Revenues))
+total3 <- mutate(total2, norm_research_development_cost = (R...D.Exp./Total.Revenues))
+total4 <- mutate(total3, cash_normalized = (Cash.and.Equivalents/Total.Revenues))
+total5 <- mutate(total4, net_income_normalized = (Net.Income/Total.Revenues))
+
+total6 <- filter(total5, Total.Revenues != 0) 
+
+# 1 Market Cap regression
+marketcapregression <- lm(total6$Marketcap ~ total6$Unlevered.Free.Cash.Flow + total6$norm_working_capital + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(marketcapregression)
+
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+library(snakecase)
+
+tab_model(marketcapregression, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="marketcapregression.html") ## this is output in the scripts folder
+
+## 2 Campaign return regression
+campaignretregression <- lm(total6$CampaignRet_inpercent ~ total6$Unlevered.Free.Cash.Flow + total6$norm_working_capital + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(campaignretregression)
+
+tab_model(campaignretregression, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="campaignretregression.html") ## this is output in the scripts folder
+
+## 3 Working Capital regression
+WorkingCapitalreg <- lm(total6$CampaignRet_inpercent ~ total6$norm_working_capital + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(WorkingCapitalreg)
+
+tab_model(WorkingCapitalreg, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="WorkingCapitalreg.html") ## this is output in the scripts folder
+
+## 4 Total Cash and Short Term Investment regression
+short_term_invest_reg <- lm(total6$CampaignRet_inpercent ~ total6$Total.Cash...ST.Investments + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(short_term_invest_reg)
+
+tab_model(short_term_invest_reg, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="short_term_invest_reg.html") ## this is output in the scripts folder
+
+## 5 Cost of Goods regression
+Cost_of_goods_reg <- lm(total6$CampaignRet_inpercent ~ total6$Cost.Of.Goods.Sold + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(Cost_of_goods_reg)
+
+tab_model(Cost_of_goods_reg, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="Cost_of_goods_reg.html") ## this is output in the scripts folder
+
+## 6 Long Term Investments regression
+long_term_invest_reg <- lm(total6$CampaignRet_inpercent ~ total6$Long.term.Investments + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(long_term_invest_reg)
+
+tab_model(long_term_invest_reg, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="long_term_invest_reg.html") ## this is output in the scripts folder
+
+
+#### LOGISTIC REGRESSIONS:
+
+## 7 Product Ineffective
+logit_weak_product <- glm(total6$"Weak Product" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
+summary(logit_weak_product)
+tab_model(logit_weak_product, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_weak_product.html") ## this is output in the scripts folder
+
+## 8 Overvalued by markets
+logit_overhyped_market <- glm(total6$"Overhyped market environment" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+summary(logit_overhyped_market)
+tab_model(logit_overhyped_market, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_overhyped_market.html") ## this is output in the scripts folder
+
+## 9 Weak Market environment
+logit_weak_market <- glm(total6$"Weak Market environment" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+summary(logit_weak_market)
+tab_model(logit_weak_market, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_weak_market.html") ## this is output in the scripts folder
+
+## 10 management incompetence
+logit_bad_mgmt <- glm(total6$"management incompetence" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+summary(logit_bad_mgmt)
+tab_model(logit_bad_mgmt, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_bad_mgmt.html") ## this is output in the scripts folder
+
+## 11 Weak board of director oversight - some results!
+logit_bad_board_director <- glm(total6$"Weak board of director oversight" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+summary(logit_bad_board_director)
+tab_model(logit_bad_board_director, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_bad_board_director.html") ## this is output in the scripts folder
+
+
+
+##This example is to change the labels - DO NOT RUN:
+tab_model(
+  m1, m2, 
+  pred.labels = c("Intercept", "Age (Carer)", "Hours per Week", "Gender (Carer)",
+                  "Education: middle (Carer)", "Education: high (Carer)", 
+                  "Age (Older Person)"),
+  dv.labels = c("First Model", "M2"),
+  string.pred = "Coeffcient",
+  string.ci = "Conf. Int (95%)",
+  string.p = "P-Value"
+)
+## END
+
+
+### ROUGH WORK: DO NOT USE:::
+
+## this works to export
+marketcapregression1 <- tidy(marketcapregression)
+write.csv(marketcapregression1, "marketcapregression1.csv")
+
+##this doesnt work too well
+out <- capture.output(summary(marketcapregression))
+cat("Unlevered Free Cash and Market Capitalization", out, file="saved.jpg", sep="n", append=TRUE)
+
+##| Primary.Industry=='Packaged Foods and Meats' | Primary.Industry=='Health Care Equipment' | Primary.Industry=='Oil and Gas Exploration and Production')
+
+industry_subset_ratios2 <- mutate(total1, norm_working_capital = ((Total.Current.Assets-Total.Current.Liabilities)/Total.Revenues))
+industry_subset_ratios3 <- mutate(industry_subset_ratios2, norm_research_development_cost = (R...D.Exp./Total.Revenues))
+
+jpeg("returns.jpg", width = 750, height = 750)
+plot(industry_subset_ratios$CampaignRet, industry_subset_ratios$Oneweekret, pch = 16, cex = 1.3, col = "blue", main = "1 week Hedge Fund returns vs entire length of campaign (n=983)", xlab = "Returns earned over entire Campaign (%)", ylab = "Returns earned over 1 week (%)", sub = "Larger negative number is better for Hedge Fund", col.main="red", col.lab="blue", col.sub="red", cex.main=1.4, cex.lab=.9, cex.sub=1.2) + abline(lm(industry_subset_ratios$CampaignRet ~ industry_subset_ratios$Oneweekret))
+dev.off() ## This is supposed to save in the working directory, but it wasn't, so if rerun, you'll have to find it and move it to the Images folder in the hedge-fund-project folder
+
+
+##building regression models:
+options(na.action="na.exclude")
+
+
+
+
+testfile  <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/data (in progress)/testfile.csv", stringsAsFactors = FALSE))
+linearMod <- lm(testfile$Marketcap ~ testfile$Unlevered.Free.Cash.Flow, data=testfile, na.action = na.exclude)
+
+testfile1 <- transform(testfile, Marketcap = as.numeric(testfile$Marketcap))
+
+
+A<-as.matrix(testfile$Marketcap) 
+b<-as.matrix(testfile$Unlevered.Free.Cash.Flow)
+
+
+```
+
