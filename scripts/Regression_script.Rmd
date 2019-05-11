@@ -24,6 +24,7 @@ total5 <- mutate(total4, net_income_normalized = (Net.Income/Total.Revenues))
 
 total6 <- filter(total5, Total.Revenues != 0) 
 
+
 # 1 Market Cap regression
 marketcapregression <- lm(total6$Marketcap ~ total6$Unlevered.Free.Cash.Flow + total6$norm_working_capital + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
 
@@ -34,7 +35,7 @@ library(sjmisc)
 library(sjlabelled)
 library(snakecase)
 
-tab_model(marketcapregression, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="marketcapregression.html") ## this is output in the scripts folder
+tab_model(marketcapregression, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="marketcapregression.jpeg") ## this is output in the scripts folder
 
 ## 2 Campaign return regression
 campaignretregression <- lm(total6$CampaignRet_inpercent ~ total6$Unlevered.Free.Cash.Flow + total6$norm_working_capital + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
@@ -71,34 +72,56 @@ summary(long_term_invest_reg)
 
 tab_model(long_term_invest_reg, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="long_term_invest_reg.html") ## this is output in the scripts folder
 
+## 7-1 Campaign return regression
+campaignret_others <- lm(total6$CampaignRet_inpercent ~ total6$Long.Term.Debt + total6$Net.Income.1 + total6$Cash.from.Investing + total6$Short.Term.Debt.Issued, data=total6, na.action = na.exclude)
+
+summary(campaignret_others)
+
+tab_model(campaignret_others, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="campaignret_others.html") ## this is output in the scripts folder
+
+## 7-2 Working Capital Regressions
+
+total7 <- mutate(total6, working_capital = Total.Current.Assets-Total.Current.Liabilities)
+total8 <- mutate(total7, working_capital2 = (working_capital)^2)
+a1 <- lm(total7$Marketcap ~ total7$working_capital + total7$cash_normalized + total7$net_income_normalized, data=total7, na.action = na.exclude)
+a3 <- lm(total8$Marketcap ~ total8$working_capital2 + total8$cash_normalized + total8$net_income_normalized, data=total8, na.action = na.exclude)
+summary(a1)
+summary(a3)
+
 
 #### LOGISTIC REGRESSIONS:
 
-## 7 Product Ineffective
+## 7 Product Ineffective - RESULTS!!
 logit_weak_product <- glm(total6$"Weak Product" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
 summary(logit_weak_product)
 tab_model(logit_weak_product, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_weak_product.html") ## this is output in the scripts folder
 
 ## 8 Overvalued by markets
-logit_overhyped_market <- glm(total6$"Overhyped market environment" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+logit_overhyped_market <- glm(total6$"Overhyped market environment" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized  + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
 summary(logit_overhyped_market)
 tab_model(logit_overhyped_market, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_overhyped_market.html") ## this is output in the scripts folder
 
 ## 9 Weak Market environment
-logit_weak_market <- glm(total6$"Weak Market environment" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+logit_weak_market <- glm(total6$"Weak Market environment" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
 summary(logit_weak_market)
 tab_model(logit_weak_market, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_weak_market.html") ## this is output in the scripts folder
 
-## 10 management incompetence
-logit_bad_mgmt <- glm(total6$"management incompetence" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+## 10 management incompetence - RESULTS!
+logit_bad_mgmt <- glm(total6$"management incompetence" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
 summary(logit_bad_mgmt)
 tab_model(logit_bad_mgmt, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_bad_mgmt.html") ## this is output in the scripts folder
 
-## 11 Weak board of director oversight - some results!
-logit_bad_board_director <- glm(total6$"Weak board of director oversight" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized, data=total6, family=binomial(link="logit"))
+## 11 Weak board of director oversight - RESULTS!
+logit_bad_board_director <- glm(total6$"Weak board of director oversight" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
 summary(logit_bad_board_director)
 tab_model(logit_bad_board_director, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="logit_bad_board_director.html") ## this is output in the scripts folder
 
+## 12 Capital Structure regression
+cap_structure_reg <- lm(total6$CampaignRet_inpercent ~ total6$Long.term.Investments + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(cap_structure_reg)
+
+tab_model(cap_structure_reg, show.se = TRUE, show.std=TRUE, show.stat=TRUE, p.style= "a", file="cap_structure_reg.html") ## this is output in the scripts folder
 
 
 ##This example is to change the labels - DO NOT RUN:

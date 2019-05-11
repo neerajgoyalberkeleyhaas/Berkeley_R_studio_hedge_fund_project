@@ -1,0 +1,154 @@
+---
+title: "Final Report"
+author: "Neeraj Goyal"
+date: "May 3, 2019"
+output: html_document
+---
+
+## Introduction
+
+This project explores the financial characteristics that allow a company and its management team to continue operating successfully when under the threat of Activist Hedge Funds. Activist Hedge Funds like Greenlight Capital, Third Point Management and Pershing Square Capital are money managers who short sell companies that they think are over valued (for any number of reasons). These funds typically state reasons why they think that company is heading for bankruptcy publicly (making them 'Activists'). These reasons can range from issues like incompetent management, weak product, pressure from competitors, etc. The Activit Hedge Funds typically buy 2-8% of the publicly traded stock of the company, which gives them a fairly significant equity position. The hedge funds then increase the effectiveness of that 2-8% equity position by amplifying it to other equity holders - they hold closed door meetings with other investors (mutual funds, university endowments, pension funds, fund of funds and others), and convince them to fight for change (change of strategy, management team including CEO, etc.).
+
+Generally, these strategies have done very well for the hedge fund - besides paying top dollar for their employees, securing a job at one of these funds requires pedigrees likefrom schools like Harvard, and previous employers like Goldman Sachs and The Blackstone Group. 
+
+The effect on companies and their managemement teams is devastating. Recent examples include significant pressure put on the CEO of Wholefoods, which ended up in the company's eventual sale to Amazon, The Dow Chemical Company - an American PetroChemical giant - ended up mergeing with Du Pont (a competitor) when Dow's CEO Andrew Liviris came under pressure to defend his mediocre strategy, and others. Once an activist hedge fund discloses that it owns equity in a company, (according to SEC disclosure rules, investors must disclose their ownership stakes once they are over 5%), they hire consulting firms (like BCG) to show the markets that their strategy is the ideal one, and they hire investment banks (like Goldman Sachs) to prepare for the eventuality of haivng to change their capital structure. 
+
+However, often activist hedge funds fail to realize gains even after pursuing a campaign, changing the CEO or members of the board of directors, and trying their hand at running the company (example athenahealth and Greenlight Capital). This paper will explore data collected on over 980 campaigns that hedge funds pursued against companies. It also includes quantitative data like returns in the stock market after the campaign announcement, the Marketcap of the firm, total asset and liabilities, cost and of goods sold, and qualitative data like where the company was based, the fate of the company, etc. 
+
+
+
+## Data
+
+
+The core of the dataset includes over 980 activist hedge fund campaigns ran by US hedge funds from 2002 to 2016. The source of this data is activistinsights.com. The data shows attributes like the name of the company under attack, the stock market on which its listed, and of critical importance - the allegations made by the hedge funds and the fall (or rise) in stock price since the hedge fund's announcement. There are multiple supporting links to news articles and original statements of the hedge funds which list the reasons why the hedge funds were critical of the companies. We went through each of these articles and developed categories (management failure, competitive headwinds, weak marketing, etc.) and dummy variables for each complaint alleged. 
+
+The next step was for us to find financial data from the income statements, balance sheets and stock market capitalization data. We procured this from S&P's Capital IQ, and merged the 2 datasets by company name, year, and stock ticker. The following tables provide some initial insights into the data:
+
+1: Number of allegations per year, by allegation type:
+
+```{r echo=FALSE, warning=FALSE, message=F}
+library(knitr)
+library(kableExtra)
+
+frequency_of_complaints <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/output/frequency_of_complaints.csv"))
+frequency_of_complaints %>%
+  kable() %>%
+  kable_styling()
+```
+
+The key insight we see here is that managerial intent has a strong impact on company performance - weak products and potential managerial manipulation are most often cited by hedge funds as reasons for weak company performance and future expectations. 
+
+# 2 Company fate 
+```{r echo=FALSE}
+Companyfate <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/output/Companyfate.csv"))
+Companyfate %>%
+  kable() %>%
+  kable_styling()
+```
+
+The key insight here is that most companies are still alive (even after being highlighted by the hedge fund as a bad apple), and that potential managerial manipulation and incompetence (including making weak products) are the biggest source of hedge fund complaints.
+
+# 3 Industry breakdown
+
+Additionally, we looked at different industries, and selected all industries atleast 10 observations (to make sure non-trivial data wasn't clouding the results). The five largest industries were Biotechnology, Application Software, Pharmaceuticals, Semiconductors and a tie between Electrical Components and Equipment and Packaged Foods and Meats. Even though these top six groups had positive operating margins, they had substantial negative returns after campaigns against them were announced (to the order of -14%).
+
+```{r echo=FALSE}
+Primary.Industry.results2 <- data.frame(read.csv("C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/output/Primary.Industry.results2.csv"))
+Primary.Industry.results2 %>%
+  kable() %>%
+  kable_styling()
+```
+# A critical insight we found was that companies with low operating margins had negative working capital, which led us to into the next steps of analyzing working capital.
+
+  
+## Graphical analyses
+
+#### Hedge Fund Returns
+
+A quick point of clarification - negative stock prices are actualy favorbale for hedge funds - these hedge funds take short positions against the company and bet that the company stock price will fall. A quick visual shows that hedge funds correctly identify players in industry that will behave declining stock prices, as the average stock returns one year after the campaign was announced was -18%:
+
+![Returns By Industry](/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/images/Returns_by_industry.png)
+
+#### Companies Operating Income vs. Decline in Stock  Prices
+
+Next, we compare companies' actual performance in terms of their operating income the year after the activist announcement to the stock market reaction post activist announcement. This will show us - do companies actually have weak performance (in terms of operating income), or is the activist simply playing a perception game by driving the companies' stock price down.  
+
+![Operating Income vs stock price](/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/images/returns_and_operating_inc_all.png)
+
+What we see is a cluster of companies performing on the low end - companies in their industries aggregate toward the low end in terms of their operating income, regardless of how the market reacts. This is actually encouraging because it signals that the market isn't easily manipulated based on negative publicity, stock prices continue to vary even when companies perform poorly.
+
+When we focus on just the top 8 industries, we see a slightly different result - 7 of the 8 the largest industries perform worse in the stock markets even though their operating income varies, suggesting that these industries are susceptible to volatility.  
+
+![Operating Income vs stock price Top 8](/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/images/Marketcap_vs_returns_top_8.png)
+
+One of the highlights of our analysis is our further break down into a 4-way view. We wanted to understand how do hedge fund returns perform compared to the company's earnings per share, but due to discretion of the management team. We broke this down by reasons for the complaints (like Competitive Headwinds, or incompetent management), and find that across all different industries, management teams developing an ineffective product was the strongest reason for underperformance. This gives us strong indication that management teams try, but are often unable to succeed in developing competitive businesses.
+
+![Four-way chart](/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/images/industry_EPS_vs_Campaign_returns.png)
+
+Finally, comparing this to a scatterplot of the returns over 1 week vs returns over the entire length of the campaign, we see that most companies cluster to the bottom left - i.e. the best returns for the hedge fund. 
+
+![Operating Income vs stock price Top 8](/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/images/returns.jpg)
+
+## Regression Models
+
+### Multiple Linear Regression model for Unlevered Free Cash Flows
+We run multiple linear and logit regression models to further explore this issue. We ran a multiple linear regression model of market capitalization on working capital, unlevered cash flow and net income. We find that Unlevered Free Cash Flow has a statistically signifiant effect (significant to 99.9%) on marketcap - an increase in 1 unit of cash flow increases market capitalization by .26 units. Essentially, having unlevered free cash flow retained allows managers to maintain a strong market capitalization, inspite of being under attack from hedge funds.
+
+```{r echo=FALSE, warning=FALSE, message=F}
+library (dplyr)
+library (readr)
+library(broom)
+
+total1file <- "C:/Users/ngoya/Dropbox/Resume Fed/Round 1, 2016/Haas/Google Drive - Activist Hedge Fund Project/hedge-fund-project/data (in progress)/total1.csv"
+total1 <- read_csv(file = total1file, col_names = TRUE)
+
+# New formulas added
+total2 <- mutate(total1, norm_working_capital = ((Total.Current.Assets-Total.Current.Liabilities)/Total.Revenues))
+total3 <- mutate(total2, norm_research_development_cost = (R...D.Exp./Total.Revenues))
+total4 <- mutate(total3, cash_normalized = (Cash.and.Equivalents/Total.Revenues))
+total5 <- mutate(total4, net_income_normalized = (Net.Income/Total.Revenues))
+total6 <- filter(total5, Total.Revenues != 0) 
+
+# 1 Market Cap regression
+marketcapregression <- lm(total6$Marketcap ~ total6$Unlevered.Free.Cash.Flow + total6$norm_working_capital + total6$cash_normalized + total6$net_income_normalized, data=total6, na.action = na.exclude)
+
+summary(marketcapregression)
+
+```
+
+### Logit Regression models for Unlevered Free Cash Flows
+Further, we ran logit regression models and found that hedge funds are likely to target companies with extra cash on hand, by claiming they have either incompetent management teams or  weak board of director oversight (statistically significant results with aserics (**) below). Hedge funds would rather prefer that these company managers rather return that capital to shareholders like the hedge funds themselves.
+
+```{r echo=FALSE, warning=FALSE, message=F}
+
+## 10 management incompetence - RESULTS!
+logit_bad_mgmt <- glm(total6$"management incompetence" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
+summary(logit_bad_mgmt)
+
+## 11 Weak board of director oversight - RESULTS!
+logit_bad_board_director <- glm(total6$"Weak board of director oversight" ~ total6$CampaignRet_inpercent + total6$Marketcap + total6$cash_normalized + total6$net_income_normalized + total6$norm_working_capital + total6$norm_research_development_cost, data=total6, family=binomial(link="logit"))
+summary(logit_bad_board_director)
+
+
+```
+### Multiple Linear Regression model for Working Capital
+
+Similarly, managers can have strong working capital invested in their growth, and this will be recognized in the market cap. We find statistically significant results showing that an increase in working capital is associated with a higher market cap as seen below:
+
+```{r echo=FALSE, warning=FALSE, message=F}
+## 7-2 Working Capital Regressions
+
+total7 <- mutate(total6, working_capital = Total.Current.Assets-Total.Current.Liabilities)
+total8 <- mutate(total7, working_capital2 = (working_capital)^2)
+a1 <- lm(total7$Marketcap ~ total7$working_capital + total7$cash_normalized + total7$net_income_normalized, data=total7, na.action = na.exclude)
+a3 <- lm(total8$Marketcap ~ total8$working_capital2 + total8$cash_normalized + total8$net_income_normalized, data=total8, na.action = na.exclude)
+summary(a1)
+summary(a3)
+
+```
+
+
+
+## Conclusion
+
+This project explored the financial characteristics that allow a company and its management team to continue operating successfully when under the threat of Activist Hedge Funds. We found that companies with strong working capitaldeployed and unlevered free cash flows allowed companies to perform better in the market, even though hedge funds claimed the companies were underperforming. This is because company managers understand that they need to invest for the long term to ensure sustained growth, and the pressure from hedge funds to have beat quarter to quarter earnings announcements is misguided.  
